@@ -11,7 +11,7 @@ public class PipesTeleporter : MonoBehaviour
 
     private void Start()
     {
-        _pipes = GetComponent<PipesContainer>().PipesArray;
+        _pipes = GetComponent<PipesContainer>().AllPipes;
 
         foreach (var pipe in _pipes)
         {

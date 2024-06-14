@@ -1,12 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class PipesContainer : MonoBehaviour
 {
-    [SerializeField] private LevelController m_LevelController;
-    public LevelController LevelController => m_LevelController;
-
     private Pipe[] _pipes;
-    public Pipe[] PipesArray => _pipes;
+    public Pipe[] AllPipes => _pipes;
 
     private void Awake()
     {

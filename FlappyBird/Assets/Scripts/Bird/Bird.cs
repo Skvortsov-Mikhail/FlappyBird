@@ -1,14 +1,19 @@
 using UnityEngine;
+using Zenject;
 
 public class Bird : MonoBehaviour
 {
-    [SerializeField] private LevelController m_LevelController;
-    public LevelController LevelController => m_LevelController;
-
     [SerializeField] private AudioSource m_FlyAudio;
     [SerializeField] private AudioSource m_DieAudio;
 
     private Rigidbody2D _rigidBody;
+
+    private LevelController _levelController;
+    [Inject]
+    public void Construct(LevelController levelController)
+    {
+        _levelController = levelController;
+    }
 
     private void Awake()
     {
@@ -33,6 +38,6 @@ public class Bird : MonoBehaviour
     {
         m_DieAudio.Play();
 
-        m_LevelController.GameOver();
+        _levelController.GameOver();
     }
 }

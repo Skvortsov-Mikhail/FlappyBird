@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class PipesMover : MonoBehaviour
 {
@@ -7,17 +8,19 @@ public class PipesMover : MonoBehaviour
 
     private float _currentSpeed;
 
-    private PipesContainer _container;
     private Pipe[] _pipes;
 
     private LevelController _levelController;
+    [Inject]
+    public void Construct(LevelController levelController)
+    {
+        _levelController = levelController;
+    }
 
     private void Start()
     {
-        _container = GetComponent<PipesContainer>();
-        _pipes = _container.PipesArray;
+        _pipes = GetComponent<PipesContainer>().AllPipes;
 
-        _levelController = _container.LevelController;
         _levelController.GameStarted += OnGameStarted;
     }
 

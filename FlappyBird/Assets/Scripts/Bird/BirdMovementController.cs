@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class BirdMovementController : MonoBehaviour
 {
@@ -8,14 +9,16 @@ public class BirdMovementController : MonoBehaviour
     [SerializeField] private float m_Force = 1.0f;
 
     private LevelController _levelController;
-
     private Bird _bird;
+    [Inject]
+    public void Construct(LevelController levelController, Bird bird)
+    {
+        _levelController = levelController;
+        _bird = bird;
+    }
 
     private void Start()
     {
-        _bird = GetComponent<Bird>();
-
-        _levelController = _bird.LevelController;
         _levelController.GameStarted += OnGameStarted;
     }
 

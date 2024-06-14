@@ -1,35 +1,40 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UI_Settings : MonoBehaviour
 {
-    [SerializeField] private SettingsController m_SettingsController;
-
     [SerializeField] private Text m_DifficultText;
     [SerializeField] private Text m_VolumeText;
 
-    private LevelController _levelController;
     private int _AddValueToNormalize = 80;
+
+    private LevelController _levelController;
+    private SettingsController _settingsController;
+    [Inject]
+    public void Construct(LevelController levelController, SettingsController settingsController)
+    {
+        _levelController = levelController;
+        _settingsController = settingsController;
+    }
 
     private void OnEnable()
     {
-        _levelController = m_SettingsController.LevelController;
-
         RefreshText();
     }
 
     private void Start()
     {
-        m_SettingsController.ChangeDifficult += OnDifficultChanged;
-        m_SettingsController.ChangeVolume += OnVolumeChanged;
+        _settingsController.ChangeDifficult += OnDifficultChanged;
+        _settingsController.ChangeVolume += OnVolumeChanged;
 
         RefreshText();
     }
 
     private void OnDestroy()
     {
-        m_SettingsController.ChangeDifficult -= OnDifficultChanged;
-        m_SettingsController.ChangeVolume -= OnVolumeChanged;
+        _settingsController.ChangeDifficult -= OnDifficultChanged;
+        _settingsController.ChangeVolume -= OnVolumeChanged;
     }
 
     private void OnDifficultChanged(int level)
@@ -46,7 +51,7 @@ public class UI_Settings : MonoBehaviour
     {
         GetDifficultText(_levelController.CurrentLevel);
 
-        m_VolumeText.text = (m_SettingsController.CurrentVolume + _AddValueToNormalize).ToString();
+        m_VolumeText.text = (_settingsController.CurrentVolume + _AddValueToNormalize).ToString();
     }
 
     private void GetDifficultText(int level)
@@ -62,7 +67,7 @@ public class UI_Settings : MonoBehaviour
                 m_DifficultText.color = Color.yellow;
                 break;
             case 3:
-                m_DifficultText.text = "High";
+                m_DifficultText.text = "Hard";
                 m_DifficultText.color = Color.red;
                 break;
         }

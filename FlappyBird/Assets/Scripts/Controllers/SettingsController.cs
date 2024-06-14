@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using Zenject;
 
 public class SettingsController : MonoBehaviour
 {
@@ -17,11 +18,10 @@ public class SettingsController : MonoBehaviour
     private readonly string _volumeKey = "volume";
 
     private LevelController _levelController;
-    public LevelController LevelController => _levelController;
-
-    private void Awake()
+    [Inject]
+    public void Construct(LevelController levelController)
     {
-        _levelController = GetComponent<LevelController>();
+        _levelController = levelController;
     }
 
     private void Start()

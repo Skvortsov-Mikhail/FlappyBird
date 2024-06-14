@@ -1,23 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UI_Score : MonoBehaviour
 {
-    [SerializeField] private ScoreCollector m_ScoreCollector;
-
     private Text _text;
+
+    private ScoreCollector _scoreCollector;
+    [Inject]
+    public void Construct(ScoreCollector scoreCollector)
+    {
+        _scoreCollector = scoreCollector;
+    }
 
     private void Start()
     {
         _text = GetComponent<Text>();
-        _text.text = m_ScoreCollector.Score.ToString();
+        _text.text = _scoreCollector.Score.ToString();
 
-        m_ScoreCollector.ScoreChanged += OnScoreChanged;
+        _scoreCollector.ScoreChanged += OnScoreChanged;
     }
 
     private void OnDestroy()
     {
-        m_ScoreCollector.ScoreChanged -= OnScoreChanged;
+        _scoreCollector.ScoreChanged -= OnScoreChanged;
     }
 
     private void OnScoreChanged(int score)

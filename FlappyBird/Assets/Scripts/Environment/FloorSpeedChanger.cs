@@ -1,12 +1,19 @@
 using UnityEngine;
+using Zenject;
 
 public class FloorSpeedChanger : MonoBehaviour
 {
-    [SerializeField] private LevelController m_LevelController;
     [SerializeField] private float m_DefaultAnimationSpeed = 1.0f;
     [SerializeField] private float m_SpeedStepByLevel = 0.5f;
 
     private Animator _animator;
+
+    private LevelController _levelController;
+    [Inject]
+    public void Construct(LevelController levelController)
+    {
+        _levelController = levelController;
+    }
 
     private void Start()
     {
@@ -14,12 +21,12 @@ public class FloorSpeedChanger : MonoBehaviour
 
         _animator.speed = m_DefaultAnimationSpeed;
 
-        m_LevelController.GameStarted += OnGameStarted;
+        _levelController.GameStarted += OnGameStarted;
     }
 
     private void OnDestroy()
     {
-        m_LevelController.GameStarted -= OnGameStarted;
+        _levelController.GameStarted -= OnGameStarted;
     }
 
     private void OnGameStarted()
@@ -29,6 +36,6 @@ public class FloorSpeedChanger : MonoBehaviour
 
     private void SetNewSpeed()
     {
-        _animator.speed = m_DefaultAnimationSpeed + (m_LevelController.CurrentLevel - 1) * m_SpeedStepByLevel;
+        _animator.speed = m_DefaultAnimationSpeed + (_levelController.CurrentLevel - 1) * m_SpeedStepByLevel;
     }
 }

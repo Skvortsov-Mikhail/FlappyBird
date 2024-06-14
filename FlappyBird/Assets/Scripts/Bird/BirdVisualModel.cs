@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BirdVisualModel : MonoBehaviour
 {
-    [SerializeField] private float m_RotateAngle = 30.0f;
+    [SerializeField] private float m_RotateAngle = 25.0f;
+
     private Rigidbody2D _birdRB;
 
     private void Start()

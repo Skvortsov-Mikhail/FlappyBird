@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class LevelController : MonoBehaviour
 {
@@ -8,15 +9,14 @@ public class LevelController : MonoBehaviour
 
     [SerializeField] private GameObject m_GameOverPanel;
 
-    private ScoreCollector _scoreCollector;
-    public ScoreCollector ScoreCollector => _scoreCollector;
-
     private int _currentLevel = 1;
     public int CurrentLevel => _currentLevel;
 
-    private void Awake()
+    private ScoreCollector _scoreCollector;
+    [Inject]
+    public void Construct(ScoreCollector scoreCollector)
     {
-        _scoreCollector = GetComponent<ScoreCollector>();
+        _scoreCollector = scoreCollector;
     }
 
     private void Start()
