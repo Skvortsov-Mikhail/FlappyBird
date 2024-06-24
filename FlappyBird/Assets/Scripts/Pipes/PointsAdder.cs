@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class PipeScorer : MonoBehaviour
+public class PointsAdder : MonoBehaviour
 {
     [SerializeField] private int m_Points = 1;
 
@@ -20,10 +20,15 @@ public class PipeScorer : MonoBehaviour
     {
         _pipe = GetComponent<Pipe>();
 
-        _birdPosition = _bird.GetComponent<BirdMovementController>().BirdStartPosition.position;
+        _birdPosition = _bird.BirdStartPosition.position;
     }
 
     private void Update()
+    {
+        TryAddPoints();
+    }
+
+    private void TryAddPoints()
     {
         if (!_pipe.IsReached && transform.position.x <= _birdPosition.x)
         {

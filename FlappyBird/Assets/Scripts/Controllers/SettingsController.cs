@@ -5,8 +5,8 @@ using Zenject;
 
 public class SettingsController : MonoBehaviour
 {
-    public Action<int> ChangeDifficult;
-    public Action<float> ChangeVolume;
+    public event Action<int> ChangeDifficult;
+    public event Action<float> ChangeVolume;
 
     [SerializeField] private AudioMixer m_SoundsMixer;
 

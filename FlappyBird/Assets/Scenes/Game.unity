@@ -1231,6 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f505b4e018e8a40aec653f8c81c859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BirdStartPos: {fileID: 714832896}
   m_FlyAudio: {fileID: 397995689}
   m_DieAudio: {fileID: 538016018}
 --- !u!50 &641637665
@@ -1325,7 +1326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da834fd876422224bab332114f4f4e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BirdStartPos: {fileID: 714832896}
   m_Force: 4
 --- !u!1001 &647330814
 PrefabInstance:

@@ -5,7 +5,7 @@ using Zenject;
 
 public class LevelController : MonoBehaviour
 {
-    public Action GameStarted;
+    public event Action GameStarted;
 
     [SerializeField] private GameObject m_GameOverPanel;
 

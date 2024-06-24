@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ScoreCollector : MonoBehaviour
 {
-    public Action<int> ScoreChanged;
+    public event Action<int> ScoreChanged;
 
     [SerializeField] private GameObject m_ScorePanel;
     public GameObject ScorePanel => m_ScorePanel;

@@ -3,9 +3,6 @@ using Zenject;
 
 public class BirdMovementController : MonoBehaviour
 {
-    [SerializeField] private Transform m_BirdStartPos;
-    public Transform BirdStartPosition => m_BirdStartPos;
-
     [SerializeField] private float m_Force = 1.0f;
 
     private LevelController _levelController;
@@ -17,8 +14,12 @@ public class BirdMovementController : MonoBehaviour
         _bird = bird;
     }
 
+    private Transform _birdStartPos;
+
     private void Start()
     {
+        _birdStartPos = _bird.BirdStartPosition;
+
         _levelController.GameStarted += OnGameStarted;
     }
 
@@ -37,6 +38,6 @@ public class BirdMovementController : MonoBehaviour
 
     private void OnGameStarted()
     {
-        _bird.transform.position = m_BirdStartPos.position;
+        _bird.transform.position = _birdStartPos.position;
     }
 }

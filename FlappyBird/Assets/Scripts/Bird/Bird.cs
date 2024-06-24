@@ -3,6 +3,9 @@ using Zenject;
 
 public class Bird : MonoBehaviour
 {
+    [SerializeField] private Transform m_BirdStartPos;
+    public Transform BirdStartPosition => m_BirdStartPos;
+
     [SerializeField] private AudioSource m_FlyAudio;
     [SerializeField] private AudioSource m_DieAudio;
 
